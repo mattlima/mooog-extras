@@ -16,7 +16,7 @@ via the `node()` function.
 
 ## Install via bower
 
-bower install mooog-extras
+`bower install mooog-extras`
 
 ## License
 
