@@ -1,0 +1,36 @@
+{
+  "name": "mooog-extras",
+  "version": "0.1",
+  "homepage": "https://github.com/mattlima/mooog-extras",
+  "authors": [
+    "Matt Lima <matt@3-tone.com>"
+  ],
+  "description": "More node types for Mooog",
+  "license": "MIT",
+  "private": false,
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "data",
+    "tests",
+    "/docco.css",
+    "Gemfile*",
+    "Gruntfile*",
+    "package.json",
+    "Rakefile",
+    "README.md",
+    "CONTRIBUTING.md",
+    "config.rb",
+    "server.rb",
+    "source",
+    "spec",
+    "src"
+  ],
+  "devDependencies": {
+  }
+}
