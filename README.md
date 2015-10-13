@@ -14,6 +14,9 @@ functionality.
 Include the source file for the node you want after mooog.js, then use them like any other
 via the `node()` function.
 
+## Install via bower
+
+bower install mooog-extras
 
 ## License
 
