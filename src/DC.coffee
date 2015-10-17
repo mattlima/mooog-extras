@@ -1,3 +1,25 @@
+###
+
+Adds DC to the input. Control via the 'dc' AudioParam exposed on the DC object
+
+
+        +            +-----------------+
+        |            |BufferSource(_bs)|
+        |            |buffer: [1,1]    |
+        |            |loop: true       |
+        |            +-----------------+
+        |                  |            
+        |            +----------+       
+        |            |Gain(_dc) |       
+        |            +----------+       
++---------------+          |            
+| Gain(_thru)   <----------+            
++---------------+                       
+        |                               
+
+
+###
+
 
 class DC extends Mooog.MooogAudioNode
   constructor: (@_instance, config)->
@@ -5,24 +27,29 @@ class DC extends Mooog.MooogAudioNode
 
 
   before_config: (config)->
-    p = @context.createScriptProcessor()
-    p.onaudioprocess = @apply_dc
-    @insert_node p, 0
-    @dc = 0
+    @_thru = @context.createGain()
+    @_dc1buffer = @context.createBuffer(1, 2, @context.sampleRate)
+    @_dc1buffer.getChannelData(0).set([ 1, 1 ])
+
+    @_bs = @context.createBufferSource()
+    @_bs.buffer = @_dc1buffer
+    @_bs.loop = true
+    @_bs.start(@context.currentTime)
+    @_dc = @context.createGain()
+
+    @insert_node @_thru, 0
+    @_bs.connect(@_dc)
+    @_dc.connect(@_thru)
+
 
   after_config: (config)->
+    console.log(config)
+    @.dc = @_dc.gain
+    @_dc.gain.value = config.gain if config.gain?
 
-
-  apply_dc: (e) =>
-    inb = e.inputBuffer
-    outb = e.outputBuffer
-    l = inb.length
-    for c in [0..(outb.numberOfChannels-1)]
-      inputData = inb.getChannelData(c)
-      outputData = outb.getChannelData(c)
-      for s, i in inputData
-        outputData[i] = inputData[i] + @dc
     null
+
+
 
 
 
