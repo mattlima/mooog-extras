@@ -2,7 +2,7 @@
 
 ## Additional Mooog nodes
 
-> Version 0.2
+> Version 0.2.1
 
 A collection of additional nodes for [Mooog](https://github.com/mattlima/mooog). This
 is my personal working collection so I make no guarantees about suitability or code 
@@ -47,6 +47,7 @@ THE SOFTWARE.
 ## Version History
 
 - 0.1 : First working version.
+- 0.2 : Add Sample and Hold node
 
 
 
