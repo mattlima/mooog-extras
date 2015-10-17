@@ -51,14 +51,5 @@ THE SOFTWARE.
 
 
 
-## Contributing
-
-[CONTRIBUTING.md](https://github.com/mattlima/mooog/blob/master/CONTRIBUTING.md)
-
-
-
-
-
-
 
 
