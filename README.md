@@ -2,7 +2,7 @@
 
 ## Additional Mooog nodes
 
-> Version 0.1
+> Version 0.2
 
 A collection of additional nodes for [Mooog](https://github.com/mattlima/mooog). This
 is my personal working collection so I make no guarantees about suitability or code 
