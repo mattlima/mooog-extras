@@ -44,7 +44,7 @@ class DC extends Mooog.MooogAudioNode
 
   after_config: (config)->
     console.log(config)
-    @.dc = @_dc.gain
+    @_thru.dc = @_dc.gain
     @_dc.gain.value = config.gain if config.gain?
 
     null
