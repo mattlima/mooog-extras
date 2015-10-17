@@ -21,19 +21,14 @@ module.exports = (grunt, options) ->
 
     # grunt-contrib-watch
     watch:
-      js:
-        files: ['src/**/*.litcoffee','src/**/*.coffee', '!src/index.litcoffee']
-        tasks: ['build']
       extras:
-        files: ['source/scratch/extras/*.coffee']
+        files: ['src/*.coffee']
         tasks: ['build-extras']
 
 
     clean:
       dist:
         ['dist/*']
-      temp:
-        ['src/index.litcoffee']
 
     coffee:
       extras:
@@ -82,20 +77,9 @@ module.exports = (grunt, options) ->
   ######### TASK DEFINITIONS #########
 
 
-  # build, watch
-  grunt.registerTask 'dev', [
-    'build'
-    'watch:js'
-  ]
-  # concat and lint
-  grunt.registerTask 'build', [
-    'coffeelint'
-    'concat'
-    'coffee:mooog'
-    'clean:temp'
-  ]
   # concat and lint
   grunt.registerTask 'build-extras', [
+    'clean'
     'coffeelint'
     'coffee:extras'
     'coffee:extrasmin'
