@@ -1,3 +1,13 @@
+
+/*
+
+  Cheap BitCrusher supporting both downsampling and
+  bitdepth modulation via the parameters
+
+  \downsample - defaults to one. Take every nth sample.
+  \bitdepth - defaults to 8. Fractional bitdepths are possible, YMMV.
+ */
+
 (function() {
   var BitCrusher,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -18,12 +28,14 @@
       p = this.context.createScriptProcessor();
       p.onaudioprocess = this.crush;
       this.insert_node(p, 0);
-      this.resolution = 8;
-      return this.downsample = 1;
+      this.bitdepth = 8;
+      this.downsample = 1;
+      return null;
     };
 
     BitCrusher.prototype.after_config = function(config) {
-      return this.sample_rate = this._instance.context.sampleRate;
+      this.sample_rate = this._instance.context.sampleRate;
+      return null;
     };
 
     BitCrusher.prototype.crush = function(e) {
@@ -36,7 +48,7 @@
         outputData = outb.getChannelData(c);
         for (i = k = 0, len = inputData.length; k < len; i = ++k) {
           s = inputData[i];
-          outputData[i] = Math.round(inputData[Math.floor(i / this.downsample) * this.downsample] * this.resolution) / this.resolution;
+          outputData[i] = Math.round(inputData[Math.floor(i / this.downsample) * this.downsample] * this.bitdepth) / this.bitdepth;
         }
       }
       return null;
