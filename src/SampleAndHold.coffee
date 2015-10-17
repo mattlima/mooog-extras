@@ -3,7 +3,40 @@
   A noise-generator-style sample and hold:
   outputs random value between -1 and 1 updated at `frequency`.
 
-  Does not provide for sampling arbitrary signal (yet).
+  Weaknesses of the current implementation:
+  - sampling rate frequency upper bound is
+  bufferLength/sampleRate seconds ( about 45Hz at 1024/44100 )
+  - Only generates noise samples (no provision for sampling
+  arbitrary inputs
+
+
+
+
+                                +--------------------+
+                                | Oscillator(input)  |
+                                | type:sine          |
++------------------+            +----------+---------+
+| BufferSource(bs) |                       |
+| buffer: [1,1]    |            +----------+--------------------+
+| loop:true        |            | ScriptProcessor(p)            |
++--------+---------+            | set out.gain to random value  |
+         |               +------+ whenever the Oscillator value |
+         |               |      | passes from <0 to >0          |
+         |               |      |                               |
+         |               |      +---------------+---------------+
+         |               |                      |
+         |               |                      |
+         |               |                      |
+         |               |      +---------------+----------------+
+         |               |      | Gain(out_null)                 |
+         |               |      | A silent connection to         |
+    +----+-----+         |      | the destination node, required |
+    | Gain(out)<---------+      | for the ScriptProcessor to     |
+    +----+-----+                | receive onaudioprocess events  |
+         |                      |                                |
+         v                      +--------------------------------+
+
+
 
 ###
 
