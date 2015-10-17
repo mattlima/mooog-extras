@@ -1,3 +1,12 @@
+
+/*
+
+  Experimental ScriptProcessor versions of basic waveforms
+  with duty cycle controls. There are aliasing problems
+  with the square wave that make it unusable as a sound
+  source (but OK for LFOs).
+ */
+
 (function() {
   var ImprovedOscillator,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
